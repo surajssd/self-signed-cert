@@ -34,8 +34,7 @@ func init() {
 	RootCmd.MarkFlagRequired("service-name")
 }
 
-// Setup the server cert. For example, user apiservers and admission webhooks
-// can use the cert to prove their identify to the kube-apiserver
+// Source inspired by: https://github.com/kubernetes/kubernetes/blob/v1.21.1/test/e2e/apimachinery/certs.go.
 func setupServerCert(namespaceName, serviceName string) {
 	certDir, err := ioutil.TempDir("", "self-signed-certificate")
 	if err != nil {
