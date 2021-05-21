@@ -45,7 +45,8 @@ func setupServerCert(namespaceName, serviceName string) {
 	if err != nil {
 		log.Fatalf("Failed to create CA private key %v", err)
 	}
-	signingCert, err := cert.NewSelfSignedCACert(cert.Config{CommonName: "e2e-server-cert-ca"}, signingKey)
+
+	signingCert, err := cert.NewSelfSignedCACert(cert.Config{CommonName: "self-signed-k8s-cert"}, signingKey)
 	if err != nil {
 		log.Fatalf("Failed to create CA cert for apiserver %v", err)
 	}
