@@ -56,10 +56,12 @@ func setupServerCert(namespaceName, serviceName string) {
 	if err := ioutil.WriteFile(caCertFile, utils.EncodeCertPEM(signingCert), 0644); err != nil {
 		log.Fatalf("Failed to write CA cert %v", err)
 	}
+
 	key, err := utils.NewPrivateKey()
 	if err != nil {
 		log.Fatalf("Failed to create private key for %v", err)
 	}
+
 	signedCert, err := utils.NewSignedCert(
 		&cert.Config{
 			CommonName: serviceName + "." + namespaceName + ".svc",
@@ -68,6 +70,7 @@ func setupServerCert(namespaceName, serviceName string) {
 		},
 		key, signingCert, signingKey,
 	)
+
 	if err != nil {
 		log.Fatalf("Failed to create cert%v", err)
 	}
